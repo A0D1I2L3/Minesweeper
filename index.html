@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Minesweeper</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="minesweeper" id="minesweeper"></div>
+      <div id="gameover" class="gameover">Game Over!</div>
+    </div>
+    <div class="flag-counter" id="flagCounter">Flags Remaining: 0</div>
+    <div class="slidecontainer">
+      <input
+        type="range"
+        min="8"
+        max="32"
+        value="8"
+        class="slider"
+        id="Range" />
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
