@@ -1,9 +1,6 @@
 * {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
-
 body {
   height: 100vh;
   background-color: #48cfcb;
@@ -12,11 +9,6 @@ body {
   justify-content: center;
   align-items: center;
   font-family: monospace;
-  overflow: hidden;
-}
-
-.container {
-  position: relative;
 }
 
 .minesweeper {
@@ -32,20 +24,14 @@ body {
   border: 1px solid black;
   font-weight: bold;
   user-select: none;
-  font-size: calc(10px + 2vw); 
-  aspect-ratio: 1; 
+  font-size: large;
 }
-
 .cell.flag {
-  color: red;
-  font-size: calc(12px + 2vw); 
+  font-size: 20px;
 }
-
 .slidecontainer {
   text-align: center;
-  margin-top: 20px;
 }
-
 .cell:hover {
   background-color: #bbb;
 }
@@ -63,36 +49,19 @@ body {
   display: none;
   justify-content: center;
   align-items: center;
-  color: black;
-  font-size: calc(20px + 5vw); 
+  color: Black;
+  font-size: 50px;
   font-weight: bold;
   z-index: 10;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.8); 
 }
 
 .gameover.show {
   display: flex;
 }
-
 .flag-counter {
-  margin-top: 10px;
+  margin-top: 0px;
   color: white;
-  font-size: calc(12px + 1vw);
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
-}
-
-@media (max-width: 600px) {
-  .cell {
-    font-size: calc(8px + 4vw); 
-  }
-
-  .gameover {
-    font-size: calc(16px + 7vw); 
-  }
-
-  .flag-counter {
-    font-size: calc(10px + 2vw); 
-  }
 }
