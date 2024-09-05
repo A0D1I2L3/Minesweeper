@@ -26,9 +26,7 @@ body {
   user-select: none;
   font-size: large;
 }
-.cell.flag {
-  font-size: 20px;
-}
+
 .slidecontainer {
   text-align: center;
 }

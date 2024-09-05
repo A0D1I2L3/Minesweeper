@@ -16,10 +16,12 @@ function addFlag(event) {
   if (cell.classList.contains("cell")) {
     if (cell.classList.contains("flag")) {
       cell.classList.remove("flag");
+      cell.classList.remove("revealed-flag");
       cell.textContent = "";
       flagCount++;
     } else if (flagCount > 0) {
       cell.classList.add("flag");
+      cell.classList.add("revealed-flag");
       cell.textContent = "🚩";
       flagCount--;
     }
@@ -33,6 +35,7 @@ function updateFlagCounter() {
 
 function revealCell(cell) {
   if (cell.classList.contains("revealed")) return;
+  if (cell.classList.contains("revealed-flag")) return;
   cell.classList.add("revealed");
   const index = Array.from(minesweeper.children).indexOf(cell);
   const [i, j] = [Math.floor(index / gridSize), index % gridSize];
@@ -100,7 +103,7 @@ function checker(event) {
   if (!gameActive) return;
 
   const cell = event.target;
-
+  if (cell.classList.contains("revealed-flag")) return;
   if (cell.classList.contains("bomb")) {
     revealBomb();
     gameover.textContent = "Game Over!";
@@ -118,7 +121,7 @@ function createGrid(size) {
 
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
-  const maxCellSize = Math.min(viewportWidth, viewportHeight) / (size*1.3) ;
+  const maxCellSize = Math.min(viewportWidth, viewportHeight) / (size * 1.3);
   const cellSize = Math.min(maxCellSize, 60);
   minesweeper.style.gridTemplateColumns = `repeat(${size}, ${cellSize}px)`;
   minesweeper.style.gridTemplateRows = `repeat(${size}, ${cellSize}px)`;
