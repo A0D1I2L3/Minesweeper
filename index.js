@@ -2,10 +2,14 @@ const slider = document.getElementById("Range");
 const minesweeper = document.getElementById("minesweeper");
 const flagCounter = document.getElementById("flagCounter");
 const gameover = document.getElementById("gameover");
+const timerDisplay = document.getElementById("timer");
 let gridSize;
 let bombSet;
 let flagCount;
 let gameActive = true;
+let gameStarted = false;
+let timerInterval;
+let startTime;
 
 function addFlag(event) {
   event.preventDefault();
@@ -96,6 +100,7 @@ function checkWin() {
     gameover.textContent = "You won!";
     gameover.classList.add("show");
     gameActive = false;
+    stopTimer();
   }
 }
 
@@ -103,21 +108,53 @@ function checker(event) {
   if (!gameActive) return;
 
   const cell = event.target;
+
+  if (!gameStarted) {
+    startTimer();
+    gameStarted = true;
+  }
+
   if (cell.classList.contains("revealed-flag")) return;
   if (cell.classList.contains("bomb")) {
     revealBomb();
     gameover.textContent = "Game Over!";
     gameover.classList.add("show");
     gameActive = false;
+    stopTimer();
   } else {
     revealCell(cell);
   }
 }
 
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+function startTimer() {
+  startTime = new Date();
+  timerInterval = setInterval(() => {
+    const elapsedTime = new Date() - startTime;
+    timerDisplay.textContent = formatTime(elapsedTime);
+  }, 10);
+}
+
+function formatTime(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  const milliseconds = Math.floor((ms % 1000) / 10);
+  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}:${
+    milliseconds < 10 ? "0" : ""
+  }${milliseconds}`;
+}
 function createGrid(size) {
   gridSize = size;
   minesweeper.innerHTML = "";
   gameover.classList.remove("show");
+
+  gameStarted = false;
+  stopTimer();
+  timerDisplay.textContent = "0:00";
 
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
